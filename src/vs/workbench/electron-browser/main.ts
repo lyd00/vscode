@@ -116,7 +116,12 @@ class CodeRendererMain extends Disposable {
 		mark('willStartWorkbench');
 
 		// Create Workbench
-		this.workbench = new Workbench(document.body, services.serviceCollection, services.logService);
+		// fix prev is document.body
+		const vscodeContainer = document.querySelector('#vscode')
+		if (!vscodeContainer) {
+			throw new Error('vscode container is not existed')
+		}
+		this.workbench = new Workbench(vscodeContainer as HTMLElement, services.serviceCollection, services.logService);
 
 		// Layout
 		this._register(addDisposableListener(window, EventType.RESIZE, e => this.onWindowResize(e, true)));

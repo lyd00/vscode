@@ -10,7 +10,9 @@ function handleDeletions() {
 	return es.mapSync(f => {
 		if (/\.ts$/.test(f.relative) && !f.contents) {
 			f.contents = Buffer.from('');
-			f.stat = { mtime: new Date() };
+			f.stat = {
+				mtime: new Date()
+			};
 		}
 
 		return f;

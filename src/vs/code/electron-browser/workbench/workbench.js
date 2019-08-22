@@ -16,18 +16,18 @@ process['lazyEnv'] = getLazyEnv();
 
 // Load workbench main
 bootstrapWindow.load([
-	'vs/workbench/workbench.main',
-	'vs/nls!vs/workbench/workbench.main',
-	'vs/css!vs/workbench/workbench.main'
-],
+		'vs/workbench/workbench.main',
+		'vs/nls!vs/workbench/workbench.main',
+		'vs/css!vs/workbench/workbench.main',
+	],
 	function (workbench, configuration) {
 		perf.mark('didLoadWorkbenchMain');
 
 		return process['lazyEnv'].then(function () {
 			perf.mark('main/startup');
-
 			// @ts-ignore
-			return require('vs/workbench/electron-browser/main').main(configuration);
+
+			return Promise.all([require('vs/workbench/electron-browser/main').main(configuration)]);
 		});
 	}, {
 		removeDeveloperKeybindingsAfterLoad: true,
@@ -85,7 +85,11 @@ function showPartsSplash(configuration) {
 
 	if (data && data.layoutInfo) {
 		// restore parts if possible (we might not always store layout info)
-		const { id, layoutInfo, colorInfo } = data;
+		const {
+			id,
+			layoutInfo,
+			colorInfo
+		} = data;
 		const splash = document.createElement('div');
 		splash.id = id;
 

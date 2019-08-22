@@ -1,7 +1,6 @@
 {
 	"version": "0.1.0",
-	"configurations": [
-		{
+	"configurations": [{
 			"type": "node",
 			"request": "launch",
 			"name": "Gulp Build",
@@ -10,6 +9,13 @@
 			"args": [
 				"hygiene"
 			]
+		},
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "Vite Build",
+			"program": "${workspaceFolder}/vite_build.js",
+			"stopOnEntry": true
 		},
 		{
 			"type": "node",
@@ -249,8 +255,7 @@
 			]
 		}
 	],
-	"compounds": [
-		{
+	"compounds": [{
 			"name": "Debug VS Code Main and Renderer",
 			"configurations": [
 				"Launch VS Code",

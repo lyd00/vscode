@@ -53,7 +53,6 @@ function createCompile(src: string, build: boolean, emitError?: boolean): (token
 	const ts = tsb.create(opts, true, undefined, err => reporter(err.toString()));
 
 	return function (token?: util.ICancellationToken) {
-
 		const utf8Filter = util.filter(data => /(\/|\\)test(\/|\\).*utf8/.test(data.path));
 		const tsFilter = util.filter(data => /\.ts$/.test(data.path));
 		const noDeclarationsFilter = util.filter(data => !(/\.d\.ts$/.test(data.path)));
